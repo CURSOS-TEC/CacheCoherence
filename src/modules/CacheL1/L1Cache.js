@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'rsuite';
+import { Table, Tag } from 'rsuite';
 import { Panel } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
@@ -24,6 +24,11 @@ class L1Cache extends React.Component {
     }
   }
   render() {
+    const StateCell = ({ rowData, dataKey, ...props }) => {
+      return (<Cell {...props}>
+        <Tag color={rowData[dataKey] === 'S' ? 'green' : (rowData[dataKey] === 'M'? 'orange' : 'red')}>{rowData[dataKey]}</Tag>
+      </Cell>)
+    }
     return (
       <Panel bordered header={<strong>Cache L1 one-way-associative</strong>}>
         <Table
@@ -41,21 +46,25 @@ class L1Cache extends React.Component {
 
           <Column width={115} fixed>
             <HeaderCell>Coherence State</HeaderCell>
-            <Cell dataKey="state" />
+            {/* <Cell dataKey="state" /> */}
+            <StateCell dataKey="state" ></StateCell>
           </Column>
 
           <Column width={115}>
-            <HeaderCell>Memory Address</HeaderCell>
+            <HeaderCell>Mem Address</HeaderCell>
             <Cell dataKey="address" />
           </Column>
 
           <Column width={70}>
             <HeaderCell>Data</HeaderCell>
-            <Cell dataKey="data" />
+            <Cell dataKey="data" >
+            
+            </Cell>
+       
           </Column>
         </Table>
       </Panel>
     );
   }
 }
-export  default L1Cache;
+export default L1Cache;
