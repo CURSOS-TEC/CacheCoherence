@@ -17,7 +17,7 @@ class App extends React.Component {
           <Col md={12}> <Node /></Col>
         </Row>
         <Row>
-          <Col md={6}><L2Cache></L2Cache> </Col>
+          <Col md={10}><L2Cache></L2Cache> </Col>
           <Col md={6}><MainMemory></MainMemory> </Col>
         </Row>
 
