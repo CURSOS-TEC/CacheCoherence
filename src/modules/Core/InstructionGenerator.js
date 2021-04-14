@@ -37,13 +37,31 @@ class InstructorGenerator {
             return U[size - 1];
         }
         const pseudo_uniform = (low, high) => {
-            return low + (high - low) * pseudo_uniform_aux(16807, (2 ** 31) - 1, this.seed, 10);
+            return Math.floor(low + (high - low) * pseudo_uniform_aux(16807, (2 ** 31) - 1, this.seed, 10));
         }
         const instructionTypes = [models.INSTRUCTION_TYPES.CALC, models.INSTRUCTION_TYPES.READ, models.INSTRUCTION_TYPES.WRITE];
-        const randomValue = pseudo_uniform(0, 3);
-        const result = instructionTypes[Math.floor(randomValue)];
-        console.log(result);
-        return result;
+        const randomValueForInstruction = pseudo_uniform(0, 3);
+        const resultInstruction = instructionTypes[randomValueForInstruction];
+        const instruction = {
+            op: resultInstruction,
+            value: null,
+            address: null
+        }
+        switch (resultInstruction) {
+            case models.INSTRUCTION_TYPES.CALC:
+                break;
+            case models.INSTRUCTION_TYPES.WRITE:
+                instruction.value = Number(pseudo_uniform(0, 2 **8 - 1)).toString(16);
+                instruction.address = Number(pseudo_uniform(0, 7)).toString(16);
+                break;
+            case models.INSTRUCTION_TYPES.READ:
+                instruction.address = Number(pseudo_uniform(0, 7)).toString(16);
+                break;
+            default:
+                break;
+        }
+        console.log(instruction);
+        return instruction;
     }
 
 }

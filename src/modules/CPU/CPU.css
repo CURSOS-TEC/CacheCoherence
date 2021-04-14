@@ -1,0 +1,12 @@
+p.operation {
+  font-size: 1.5em;
+}
+span.write-operation{
+    color: #F6D55C;
+}
+span.calc-operation{
+    color: #266393;
+}
+span.read-operation{
+    color: #3CAEA3;
+}

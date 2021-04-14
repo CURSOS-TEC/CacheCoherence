@@ -48,7 +48,7 @@ class L2Cache extends React.Component {
       return (
         
         <Cell {...props}>
-          {rowData[dataKey][props.pIndex]}
+          {rowData[dataKey][props.pindex]}
         </Cell>
       );
     }
@@ -75,22 +75,22 @@ class L2Cache extends React.Component {
 
           <Column width={40} >
             <HeaderCell>P0</HeaderCell>
-            <ProcessorStatusCell dataKey="list" pIndex="0"></ProcessorStatusCell>
+            <ProcessorStatusCell dataKey="list" pindex="0"></ProcessorStatusCell>
           </Column>
 
           <Column width={40} >
             <HeaderCell>P1</HeaderCell>
-            <ProcessorStatusCell dataKey="list" pIndex="1"></ProcessorStatusCell>
+            <ProcessorStatusCell dataKey="list" pindex="1"></ProcessorStatusCell>
           </Column>
 
           <Column width={40} >
             <HeaderCell>P2</HeaderCell>
-            <ProcessorStatusCell dataKey="list" pIndex="2"></ProcessorStatusCell>
+            <ProcessorStatusCell dataKey="list" pindex="2"></ProcessorStatusCell>
           </Column>
 
           <Column width={40} >
             <HeaderCell>P3</HeaderCell>
-            <ProcessorStatusCell dataKey="list" pIndex="3"></ProcessorStatusCell>
+            <ProcessorStatusCell dataKey="list" pindex="3"></ProcessorStatusCell>
           </Column>
 
           <Column width={125}>

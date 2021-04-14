@@ -10,15 +10,16 @@ class Node extends React.Component {
     super(props);
   }
   render() {
+    console.log(this.props);
     return (
       <Panel className="NodePanel" bordered>
         <Row>
-          <Col md="2"># </Col>
+          <Col md={2}><p class="identifier"># {this.props.id}</p></Col>
           <Col md={12}>
             <L1Cache />
           </Col>
           <Col md={10}>
-            <CPU />
+            <CPU id={this.props.id} />
             <Control />
           </Col>
         </Row>
