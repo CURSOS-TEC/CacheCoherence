@@ -24,8 +24,8 @@ class InstructorGenerator {
      *  address:  dirección que aplica solo cuando la operación es lectura o de escritura
      * }
      */
-    generateInstruction() {
-        this.seed = Date.now();
+    generateInstruction(processorId) {
+        this.seed = Date.now()*(processorId+1);
         const pseudo_uniform_aux = (mult, mod, seed, size) => {
             const U = Array(size).fill(0);
             let x = (seed * mult + 1) % mod;
@@ -51,11 +51,11 @@ class InstructorGenerator {
             case models.INSTRUCTION_TYPES.CALC:
                 break;
             case models.INSTRUCTION_TYPES.WRITE:
-                instruction.value = Number(pseudo_uniform(0, 2 **8 - 1)).toString(16);
-                instruction.address = Number(pseudo_uniform(0, 7)).toString(16);
+                instruction.value = `0x${pseudo_uniform(0, 2 **8 - 1)}`;
+                instruction.address = `0x${pseudo_uniform(0, 7)}`;
                 break;
             case models.INSTRUCTION_TYPES.READ:
-                instruction.address = Number(pseudo_uniform(0, 7)).toString(16);
+                instruction.address = `0x${pseudo_uniform(0, 7)}`;
                 break;
             default:
                 break;
