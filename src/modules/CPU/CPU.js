@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
-import { Panel, Button } from 'rsuite';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Panel } from 'rsuite';
 import InstructorGenerator from '../Core/InstructionGenerator';
 import models from '../Core/models';
+import { fetch } from './CPUSlice';
+import { useDispatch } from 'react-redux';
+
 import './CPU.css';
 /**
  * Esta clase abstrae la simulación de 
  */
 export const CPU = (props) => {
-  const generator = new InstructorGenerator();
-  const [instruction, setInstruction] = useState(null);
+  //const dispatch = useDispatch();
+  const dataInstruction = useSelector(state => state.CPUs.value[props.id]);
+  console.log(dataInstruction);
   // const fetchInstructions = () => {
-  //   setTimeout(() => {
-  //     const generator = new InstructorGenerator();
-  //     setInterval(() => {
-  //       setInstruction({ instruction: generator.generateInstruction() });
-  //     }, 5000);
-  //   }, 2000);
+
+  //   const generator = new InstructorGenerator();
+  //   setInterval(() => {
+  //     let instruction = generator.generateInstruction();
+  //     console.log('for CP1 ', props.id);
+  //     // dispatch(fetch({ id: props.id, ...instruction }));
+  //     // setInstruction({ instruction: generator.generateInstruction() });
+  //   }, 10000);
+
   // }
   // fetchInstructions();
   const DisplayOperation = (dProps) => {
-    console.log(dProps);
-    const data = dProps?.instruction;
+    const data = dProps.instruction;
     if (data) {
-      switch (data.instruction.op) {
+      switch (data.op) {
         case models.INSTRUCTION_TYPES.WRITE:
-          return (<span class="write-operation">
-            {data.instruction.op}: [0x{data.instruction.address}]: {data.instruction.value}
+          return (<span className="write-operation">
+            {data.op}: [{data.address}]: {data.value}
           </span>);
         case models.INSTRUCTION_TYPES.READ:
-          return (<span class="read-operation">
-            {data.instruction.op}: [0x{data.instruction.address}]
+          return (<span className="read-operation">
+            {data.op}: [{data.address}]
           </span>);
         case models.INSTRUCTION_TYPES.CALC:
-          return (<span class="calc-operation">
-            {data.instruction.op}
+          return (<span className="calc-operation">
+            {data.op}
           </span>);
         default:
           <p>No instruction</p>
@@ -44,9 +51,8 @@ export const CPU = (props) => {
   };
   return (
     <Panel header="CPU" bordered>
-      <Button onClick={ () => setInstruction({instruction: generator.generateInstruction()  })}> Generate Instruction </Button>
-      <p class="operation">
-        <strong>P{props.id}</strong>: <DisplayOperation instruction={instruction}></DisplayOperation>
+      <p className="operation">
+        <strong>P{props.id}</strong>: <DisplayOperation instruction={dataInstruction}></DisplayOperation>
       </p>
     </Panel>
   );

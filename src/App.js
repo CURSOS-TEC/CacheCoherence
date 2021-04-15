@@ -8,20 +8,21 @@ import Node from './modules/Node/Node';
 // To test RAM
 import {useDispatch } from 'react-redux';
 import { write } from './modules/MainMemory/MainMemorySlice';
-
+import { fetch } from './modules/CPU/CPUSlice';
 
 export const App = props => {
   const dispatch = useDispatch();
   return (
     <Grid fluid>
       <Button onClick={() => dispatch(write({'address': '0x1', 'value':'0x12'}))}> Test RAM </Button>
+      <Button onClick={() => dispatch(fetch({'id': '1', 'op':'WRITE', 'address': '0x1', 'value': '0x88'}))}> Test CPU </Button>
       <Row>
-        <Col md={12}><Node id={props.context.NODES[0].id} /></Col>
-        <Col md={12}> <Node id={props.context.NODES[1].id} /></Col>
+        <Col md={12}><Node id={0} /></Col>
+        <Col md={12}> <Node id={1} /></Col>
       </Row>
       <Row>
-        <Col md={12}><Node id={props.context.NODES[2].id} /></Col>
-        <Col md={12}> <Node id={props.context.NODES[3].id} /></Col>
+        <Col md={12}><Node id={2} /></Col>
+        <Col md={12}> <Node id={3} /></Col>
       </Row>
       <Row>
         <Col md={10}><L2Cache></L2Cache> </Col>
