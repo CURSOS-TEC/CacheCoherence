@@ -3,7 +3,7 @@ import { Table, Tag } from 'rsuite';
 import { Panel } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
-export const L1Cache = props => {
+export const CacheL1 = props => {
 
     const data = [
       {
@@ -61,4 +61,4 @@ export const L1Cache = props => {
       </Panel>
     );
   }
-export default L1Cache;
+export default CacheL1;
