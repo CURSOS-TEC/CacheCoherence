@@ -3,30 +3,25 @@ import { Table, Tag } from 'rsuite';
 import { Panel } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
-class L1Cache extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        {
-          block: '0',
-          state: 'M',
-          address: '0x1',
-          data: '0x9F'
-        },
-        {
-          block: '1',
-          state: 'S',
-          address: '0x23',
-          data: '0x9F'
-        }
-      ]
-    }
-  }
-  render() {
+export const L1Cache = props => {
+
+    const data = [
+      {
+        block: '0',
+        state: 'M',
+        address: '0x1',
+        data: '0x9F'
+      },
+      {
+        block: '1',
+        state: 'S',
+        address: '0x23',
+        data: '0x9F'
+      }
+    ];
     const StateCell = ({ rowData, dataKey, ...props }) => {
       return (<Cell {...props}>
-        <Tag color={rowData[dataKey] === 'S' ? 'green' : (rowData[dataKey] === 'M'? 'orange' : 'red')}>{rowData[dataKey]}</Tag>
+        <Tag color={rowData[dataKey] === 'S' ? 'green' : (rowData[dataKey] === 'M' ? 'orange' : 'red')}>{rowData[dataKey]}</Tag>
       </Cell>)
     }
     return (
@@ -34,7 +29,7 @@ class L1Cache extends React.Component {
         <Table
           height={135}
           width={370}
-          data={this.state.data}
+          data={data}
           onRowClick={data => {
             console.log(data);
           }}
@@ -58,13 +53,12 @@ class L1Cache extends React.Component {
           <Column width={70}>
             <HeaderCell>Data</HeaderCell>
             <Cell dataKey="data" >
-            
+
             </Cell>
-       
+
           </Column>
         </Table>
       </Panel>
     );
   }
-}
 export default L1Cache;
