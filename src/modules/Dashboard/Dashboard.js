@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux';
 import { write } from '../MainMemory/MainMemorySlice';
 // CPU 
 import { fetch, setFetch } from '../CPU/CPUSlice';
-
+//CacheL1
+import { setBlock } from './../CacheL1/CacheL1Splice';
 const styles = {
   marginBottom: 10
 }
@@ -58,7 +59,9 @@ export const Dashboard = function () {
   );
 
   const testDispatch = () => {
-    dispatch(setFetch({ id: '2', canFetch: true }));
+    //dispatch(setFetch({ id: '2', canFetch: true })); //CPU
+    dispatch(setBlock({ id: '0', block: '1', state: 'M', address: '0x00', data: '0xFF' })); 
+    // CACHEL1
   }
   return (
     <Panel header="Control Dashboard" bordered >
