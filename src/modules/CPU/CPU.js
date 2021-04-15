@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Panel } from 'rsuite';
+import { Panel, Tag } from 'rsuite';
+
 import models from '../Core/models';
 
 import './CPU.css';
@@ -8,6 +9,7 @@ import './CPU.css';
  * Esta clase abstrae la simulación de 
  */
 export const CPU = (props) => {
+
   const dataInstruction = useSelector(state => state.CPUs.value[props.id]);
   //console.log(dataInstruction);
   const DisplayOperation = (dProps) => {
@@ -33,8 +35,17 @@ export const CPU = (props) => {
     }
     return null;
   };
+  const DisplayState = (dProps) => {
+    if (dProps.canFetch) {
+      return (<Tag color="green">READY</Tag>);
+    }
+    else {
+      return (<Tag color="red">IDLE</Tag>);
+    }
+  }
   return (
     <Panel header="CPU" bordered>
+      <DisplayState canFetch={dataInstruction.canFetch}></DisplayState>
       <p className="operation">
         <strong>P{props.id}</strong>: <DisplayOperation instruction={dataInstruction}></DisplayOperation>
       </p>

@@ -2,18 +2,32 @@
 import React from 'react';
 import { Grid, Row, Col, Button, Input, InputGroup, Panel } from 'rsuite';
 import { useDispatch } from 'react-redux';
-import { write } from '../MainMemory/MainMemorySlice';
-import { fetch } from '../CPU/CPUSlice';
 import InstructorGenerator from '../Core/InstructionGenerator';
+import { useSelector } from 'react-redux';
+// RAM Write ops
+import { write } from '../MainMemory/MainMemorySlice';
+// CPU 
+import { fetch, setFetch } from '../CPU/CPUSlice';
+
 const styles = {
   marginBottom: 10
 }
+
 export const Dashboard = function () {
+  const allCPUS = useSelector(state => state.CPUs.value);
+
   const generator = new InstructorGenerator();
   const fetchInstruction = (processorId) => {
     return { id: processorId, ...generator.generateInstruction(processorId) };
   }
   const dispatch = useDispatch();
+  const dispatchFetch = () => {
+    for (const cpu of allCPUS) {
+      if (cpu.canFetch) {
+        dispatch(fetch(fetchInstruction(cpu.id)));
+      }
+    }
+  };
   const CustomInputGroupWidthButton = ({ placeholder, ...props }) => (
     <Row>
       <Col md={9}>
@@ -42,6 +56,10 @@ export const Dashboard = function () {
       </Col>
     </Row>
   );
+
+  const testDispatch = () => {
+    dispatch(setFetch({ id: '2', canFetch: true }));
+  }
   return (
     <Panel header="Control Dashboard" bordered >
       <Grid fluid>
@@ -51,13 +69,8 @@ export const Dashboard = function () {
           </Col>
         </Row>
         <Row>
-          <Col md={12}><Button onClick={() => {
-            dispatch(fetch(fetchInstruction('0')));
-            dispatch(fetch(fetchInstruction('1')));
-            dispatch(fetch(fetchInstruction('2')));
-            dispatch(fetch(fetchInstruction('3')));
-          }} > Next Cycle </Button></Col>
-          <Col md={12}> <Button onClick={() => fetchInstruction()}> Continue </Button></Col>
+          <Col md={12}><Button onClick={() => dispatchFetch()} > Next Cycle </Button></Col>
+          <Col md={12}> <Button onClick={() => testDispatch()}> Continue </Button></Col>
         </Row>
       </Grid>
     </Panel>

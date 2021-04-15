@@ -32,7 +32,7 @@ export const cpuSlice = createSlice({
                 // identifier
                 id: '2',
                 // used in order 
-                canFetch: true,
+                canFetch: false,
                 //op
                 op: 'CALC',
                 //value
@@ -64,9 +64,17 @@ export const cpuSlice = createSlice({
             cpu.op = op;
             cpu.address = address;
             cpu.value = value;
+        },
+        setFetch: (state,action) =>{
+            const { id, canFetch } = action.payload; 
+            const cpu = state.value.find((item) => {
+                return item.id === id;
+            });
+            cpu.canFetch = canFetch;
         }
+
     }
 }
 );
-export const { fetch } = cpuSlice.actions;
+export const { fetch,setFetch } = cpuSlice.actions;
 export default cpuSlice.reducer;
