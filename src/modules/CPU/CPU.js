@@ -1,17 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Panel, Tag } from 'rsuite';
-
 import models from '../Core/models';
-
+import { setFetch } from '../CPU/CPUSlice';
 import './CPU.css';
 /**
  * Esta clase abstrae la simulación de 
  */
 export const CPU = (props) => {
-
+  const dispatch = useDispatch();
   const dataInstruction = useSelector(state => state.CPUs.value[props.id]);
   //console.log(dataInstruction);
+
+  const handleInstruction = (instruction) => {
+    if (instruction.op === models.INSTRUCTION_TYPES.READ) {
+      // read the value from Cache
+    }else if (instruction.op === models.INSTRUCTION_TYPES.READ){
+      // write the value to cache
+    }
+  }
+
   const DisplayOperation = (dProps) => {
     const data = dProps.instruction;
     if (data) {
@@ -43,6 +51,7 @@ export const CPU = (props) => {
       return (<Tag color="red">IDLE</Tag>);
     }
   }
+  handleInstruction(dataInstruction);
   return (
     <Panel header="CPU" bordered>
       <DisplayState canFetch={dataInstruction.canFetch}></DisplayState>

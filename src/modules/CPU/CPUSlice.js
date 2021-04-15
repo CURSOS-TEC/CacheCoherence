@@ -60,21 +60,26 @@ export const cpuSlice = createSlice({
             const { id, op, value, address } = action.payload;
             const cpu = state.value.find((item) => {
                 return item.id === id;
-            });         
+            });
             cpu.op = op;
             cpu.address = address;
             cpu.value = value;
         },
-        setFetch: (state,action) =>{
-            const { id, canFetch } = action.payload; 
+        setFetch: (state, action) => {
+            const { id, canFetch } = action.payload;
             const cpu = state.value.find((item) => {
                 return item.id === id;
             });
-            cpu.canFetch = canFetch;
+            if (cpu) {
+                cpu.canFetch = canFetch;
+            }else {
+                console.log(`Can't make the fetch`, id, canFetch);
+            }
+
         }
 
     }
 }
 );
-export const { fetch,setFetch } = cpuSlice.actions;
+export const { fetch, setFetch } = cpuSlice.actions;
 export default cpuSlice.reducer;
