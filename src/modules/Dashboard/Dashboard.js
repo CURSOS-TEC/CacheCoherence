@@ -8,13 +8,6 @@ import InstructorGenerator from '../Core/InstructionGenerator';
 const styles = {
   marginBottom: 10
 }
-// To test RAM
-
-/**
- * 
- * @returns  <Button onClick={() => dispatch(write({'address': '0x1', 'value':'0x12'}))}> Test RAM </Button>
- <Button onClick={() => dispatch(fetch({'id': '1', 'op':'WRITE', 'address': '0x1', 'value': '0x88'}))}> Test CPU </Button>
- */
 export const Dashboard = function () {
   const generator = new InstructorGenerator();
   const fetchInstruction = (processorId) => {
