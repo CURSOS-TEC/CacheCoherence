@@ -9,6 +9,7 @@ import Node from './modules/Node/Node';
 import {useDispatch } from 'react-redux';
 import { write } from './modules/MainMemory/MainMemorySlice';
 import { fetch } from './modules/CPU/CPUSlice';
+import Dashboard from './modules/Dashboard/Dashboard';
 
 export const App = props => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const App = props => {
       <Row>
         <Col md={10}><L2Cache></L2Cache> </Col>
         <Col md={6}><MainMemory></MainMemory> </Col>
+        <Col md={6}> <Dashboard></Dashboard></Col>
       </Row>
 
     </Grid>

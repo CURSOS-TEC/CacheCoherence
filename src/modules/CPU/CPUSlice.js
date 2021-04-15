@@ -7,6 +7,8 @@ export const cpuSlice = createSlice({
             {
                 // identifier
                 id: '0',
+                // used in order 
+                canFetch: true,
                 //op
                 op: 'CALC',
                 //value
@@ -17,6 +19,8 @@ export const cpuSlice = createSlice({
             {
                 // identifier
                 id: '1',
+                // used in order 
+                canFetch: true,
                 //op
                 op: 'CALC',
                 //value
@@ -27,6 +31,8 @@ export const cpuSlice = createSlice({
             {
                 // identifier
                 id: '2',
+                // used in order 
+                canFetch: true,
                 //op
                 op: 'CALC',
                 //value
@@ -37,6 +43,8 @@ export const cpuSlice = createSlice({
             {
                 // identifier
                 id: '3',
+                // used in order 
+                canFetch: true,
                 //op
                 op: 'CALC',
                 //value
