@@ -16,6 +16,14 @@ const styles = {
 }
 
 export const Dashboard = function () {
+  const customInstruction = {
+    id: '',
+    op: '',
+    address: '',
+    value: ''
+  };
+
+
   const allCPUS = useSelector(state => state.CPUs.value);
 
   const generator = new InstructorGenerator();
@@ -35,33 +43,44 @@ export const Dashboard = function () {
       <Col md={12}>
         <InputGroup {...props} inside style={styles}>
           <InputGroup.Addon>P</InputGroup.Addon>
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} onChange={(value, event) => {
+            customInstruction.id = value;
+          }} />
         </InputGroup>
       </Col>
       <Col md={12}>
-        <InputGroup {...props} inside style={styles}>
+        <InputGroup {...props} inside style={styles} >
           <InputGroup.Addon>Op</InputGroup.Addon>
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} onChange={(value, event) => {
+            customInstruction.op = value;
+          }} />
         </InputGroup>
       </Col>
       <Col md={12}>
         <InputGroup {...props} inside style={styles}>
           <InputGroup.Addon>0x</InputGroup.Addon>
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} onChange={(value, event) => {
+            customInstruction.address = value;
+          }} />
         </InputGroup>
       </Col>
       <Col md={12}>
         <InputGroup {...props} inside style={styles}>
           <InputGroup.Addon>Val</InputGroup.Addon>
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} onChange={(value, event) => {
+            customInstruction.value = value;
+          }} />
         </InputGroup>
       </Col>
     </Row>
   );
 
   const testDispatch = () => {
-    dispatch(setBlock({ id: '0', block: '1', state: 'M', address: '0x00', data: '0xFF' }));
+    //dispatch(setBlock({ id: '0', block: '1', state: 'M', address: '0x00', data: '0xFF' }));
     // CACHEL1
+    if (customInstruction.id && customInstruction.value && customInstruction.address && customInstruction.op) {
+      dispatch(fetch(customInstruction));
+    }
   }
   return (
     <Panel header="Control Dashboard" bordered >
