@@ -47,10 +47,10 @@ export const Control = props => {
 
   //console.log(targetInstruction);
   const handleTargetInstruction = (instruction) => {
+    //console.log(instruction);
+    const blockIndex = Number(instruction.address) % 2; // one way associative 
+    const cacheLine = cacheData.blocks[blockIndex];
     if (instruction.op === models.INSTRUCTION_TYPES.READ) {
-      //console.log(instruction);
-      const blockIndex = Number(instruction.address) % 2; // one way associative 
-      const cacheLine = cacheData.blocks[blockIndex];
       // check if data is here and its valid
       if (instruction.address === cacheLine.address && (cacheLine.state === models.CACHE_L1_STATES.MODIFIED || cacheLine.state === models.CACHE_L1_STATES.SHARED)) {
         console.log('READ HIT', cacheLine);
@@ -60,14 +60,23 @@ export const Control = props => {
         message = models.COHERENCE_STATUS.READ_MISS;
       }
     } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
-
+      // check if data is here and its valid
+      if (instruction.address === cacheLine.address && (cacheLine.state === models.CACHE_L1_STATES.MODIFIED || cacheLine.state === models.CACHE_L1_STATES.SHARED)) {
+        console.log('WRITE HIT', cacheLine);
+        message = models.COHERENCE_STATUS.WRITE_HIT;
+      } else {
+        console.log('WRITE MISS', cacheLine);
+        message = models.COHERENCE_STATUS.WRITE_MISS;
+      }
+    }else {
+      message = "";
     }
     // check the cache L1 el estado de la información
   }
   handleTargetInstruction(targetInstruction.instruction);
   return (
 
-    <Panel header="Control" bordered>
+    <Panel header="Control, last memory-related instruction" bordered>
       <Flag message={message} instruction={targetInstruction.instruction}></Flag>
     </Panel>
   );
