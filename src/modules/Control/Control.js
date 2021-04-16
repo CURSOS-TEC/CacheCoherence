@@ -3,6 +3,7 @@ import { Panel, Tag } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFetch } from './../CPU/CPUSlice';
 import models from '../Core/models';
+import './Control.css';
 /**
  * this function handles when the CPU is requesting  for READ and Write OPS
  * @param {*} props 
@@ -13,28 +14,29 @@ export const Control = props => {
   const dispatch = useDispatch();
   const targetInstruction = useSelector(state => state.Controls.value[props.id]);
   const cacheData = useSelector(state => state.CachesL1.value[props.id]);
+  let currentBlockIndex = null;
   let message = '';
   const Flag = (props) => {
 
     switch (props.message) {
       case models.COHERENCE_STATUS.READ_HIT:
         return (
-          <Tag>Read hit: {props.instruction.address}  </Tag>
+          <Tag><strong className="readHit">Read hit</strong> in block {props.blockIndex}: {props.instruction.address}  </Tag>
         )
       case models.COHERENCE_STATUS.READ_MISS:
 
         return (
-          <Tag>Read miss:  {props.instruction.address}  </Tag>
+          <Tag><strong className="readMiss">Read miss</strong> in block {props.blockIndex}:  {props.instruction.address}  </Tag>
         )
       case models.COHERENCE_STATUS.WRITE_HIT:
 
         return (
-          <Tag>Write hit:  {props.instruction.address}   {props.instruction.value}  </Tag>
+          <Tag><strong className="writeHit">Write hit</strong> in block {props.blockIndex}:  RAM[{props.instruction.address}]   {props.instruction.value}  </Tag>
         )
       case models.COHERENCE_STATUS.WRITE_MISS:
 
         return (
-          <Tag>Write miss : {props.instruction.address}   {props.instruction.value}   </Tag>
+          <Tag><strong className="writeMiss">Write miss</strong> in block {props.blockIndex}: RAM[{props.instruction.address}]   {props.instruction.value}   </Tag>
         )
 
       default:
@@ -68,16 +70,17 @@ export const Control = props => {
         console.log('WRITE MISS', cacheLine);
         message = models.COHERENCE_STATUS.WRITE_MISS;
       }
-    }else {
+    } else {
       message = "";
     }
+    currentBlockIndex = blockIndex;
     // check the cache L1 el estado de la información
   }
   handleTargetInstruction(targetInstruction.instruction);
   return (
 
     <Panel header="Control, last memory-related instruction" bordered>
-      <Flag message={message} instruction={targetInstruction.instruction}></Flag>
+      <Flag message={message} instruction={targetInstruction.instruction} blockIndex={currentBlockIndex}></Flag>
     </Panel>
   );
 }

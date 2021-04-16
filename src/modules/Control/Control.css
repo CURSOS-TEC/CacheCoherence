@@ -1,0 +1,12 @@
+strong.readMiss{
+    color: #ff9800;
+}
+strong.readHit{
+    color: #4caf50;
+}
+strong.writeHit{
+    color: #4caf50;
+}
+strong.writeMiss{
+    color: #ff9800;
+}
