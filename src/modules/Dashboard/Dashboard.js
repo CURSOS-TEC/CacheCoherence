@@ -1,15 +1,16 @@
 'use-strict'
 import React from 'react';
-import { Grid, Row, Col, Button, Input, InputGroup, Panel } from 'rsuite';
+import { Grid, Row, Col, Button, Input, InputGroup, Panel, Toggle, Tag } from 'rsuite';
 import { useDispatch } from 'react-redux';
 import InstructorGenerator from '../Core/InstructionGenerator';
 import { useSelector } from 'react-redux';
+import './Dashboard.css';
 // RAM Write ops
 import { write } from '../MainMemory/MainMemorySlice';
 // CPU 
 import { fetch, setFetch } from '../CPU/CPUSlice';
 //CacheL1
-import { setBlock } from './../CacheL1/CacheL1Splice';
+import { setBlock } from './../CacheL1/CacheL1Slice';
 const styles = {
   marginBottom: 10
 }
@@ -30,28 +31,28 @@ export const Dashboard = function () {
     }
   };
   const CustomInputGroupWidthButton = ({ placeholder, ...props }) => (
-    <Row>
-      <Col md={9}>
+    <Row className="inputContainer">
+      <Col md={12}>
         <InputGroup {...props} inside style={styles}>
           <InputGroup.Addon>P</InputGroup.Addon>
           <Input placeholder={placeholder} />
         </InputGroup>
       </Col>
-      <Col md={9}>
+      <Col md={12}>
         <InputGroup {...props} inside style={styles}>
           <InputGroup.Addon>Op</InputGroup.Addon>
           <Input placeholder={placeholder} />
         </InputGroup>
       </Col>
-      <Col md={9}>
+      <Col md={12}>
         <InputGroup {...props} inside style={styles}>
           <InputGroup.Addon>0x</InputGroup.Addon>
           <Input placeholder={placeholder} />
         </InputGroup>
       </Col>
-      <Col md={9}>
+      <Col md={12}>
         <InputGroup {...props} inside style={styles}>
-          <InputGroup.Addon>Value</InputGroup.Addon>
+          <InputGroup.Addon>Val</InputGroup.Addon>
           <Input placeholder={placeholder} />
         </InputGroup>
       </Col>
@@ -59,8 +60,7 @@ export const Dashboard = function () {
   );
 
   const testDispatch = () => {
-    //dispatch(setFetch({ id: '2', canFetch: true })); //CPU
-    dispatch(setBlock({ id: '0', block: '1', state: 'M', address: '0x00', data: '0xFF' })); 
+    dispatch(setBlock({ id: '0', block: '1', state: 'M', address: '0x00', data: '0xFF' }));
     // CACHEL1
   }
   return (
@@ -71,9 +71,37 @@ export const Dashboard = function () {
             <CustomInputGroupWidthButton></CustomInputGroupWidthButton>
           </Col>
         </Row>
+        <Row className="controlsButtons">
+          <Col className="buttonContainer" md={12}><Button onClick={() => dispatchFetch()} > Next Cycle </Button></Col>
+          <Col className="buttonContainer" md={12}> <Button onClick={() => testDispatch()}> Continue </Button></Col>
+        </Row>
         <Row>
-          <Col md={12}><Button onClick={() => dispatchFetch()} > Next Cycle </Button></Col>
-          <Col md={12}> <Button onClick={() => testDispatch()}> Continue </Button></Col>
+          <Col className="cpuSwitch" md={12}>
+            <Tag>P0</Tag>
+            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+              dispatch(setFetch({ id: '0', canFetch: checked }));
+            }} />
+          </Col>
+          <Col className="cpuSwitch" md={12}>
+            <Tag>P1</Tag>
+            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+              dispatch(setFetch({ id: '1', canFetch: checked }));
+            }} />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="cpuSwitch" md={12}>
+            <Tag>P2</Tag>
+            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+              dispatch(setFetch({ id: '2', canFetch: checked }));
+            }} />
+          </Col>
+          <Col className="cpuSwitch" md={12}>
+            <Tag>P3</Tag>
+            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+              dispatch(setFetch({ id: '3', canFetch: checked }));
+            }} />
+          </Col>
         </Row>
       </Grid>
     </Panel>

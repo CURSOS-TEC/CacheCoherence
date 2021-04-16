@@ -19,7 +19,7 @@ export const CacheL1 = props => {
         width={370}
         data={data.blocks}
         onRowClick={data => {
-          console.log(data);
+          //console.log(data);
         }}
       >
         <Column width={70} align="center" fixed>

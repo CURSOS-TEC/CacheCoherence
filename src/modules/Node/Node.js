@@ -15,7 +15,7 @@ export const Node = props => {
         </Col>
         <Col md={10}>
           <CPU id={props.id} />
-          <Control />
+          <Control id={props.id} />
         </Col>
       </Row>
     </Panel>

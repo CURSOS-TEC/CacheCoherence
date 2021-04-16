@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Panel, Tag } from 'rsuite';
 import models from '../Core/models';
 import { setFetch } from '../CPU/CPUSlice';
+import { setInstructionTarget } from '../Control/ControlSlice';
 import './CPU.css';
 /**
  * Esta clase abstrae la simulación de 
@@ -15,8 +16,26 @@ export const CPU = (props) => {
   const handleInstruction = (instruction) => {
     if (instruction.op === models.INSTRUCTION_TYPES.READ) {
       // read the value from Cache
-    }else if (instruction.op === models.INSTRUCTION_TYPES.READ){
+      dispatch(setInstructionTarget({
+        id: props.id,
+        instruction: {
+          op: models.INSTRUCTION_TYPES.READ,
+          address: dataInstruction.address,
+          value: null
+        },
+        completed: false
+      }))
+    } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
       // write the value to cache
+      dispatch(setInstructionTarget({
+        id: props.id,
+        instruction: {
+          op: models.INSTRUCTION_TYPES.WRITE,
+          address: dataInstruction.address,
+          value: dataInstruction.value
+        },
+        completed: false
+      }))
     }
   }
 

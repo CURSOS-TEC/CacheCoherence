@@ -1,0 +1,18 @@
+.cpuSwitch{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.controlsButtons{
+    display: flex;
+    justify-content: center;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+}
+.inputContainer{
+    display: flex;
+    justify-content: center;
+}

@@ -60,7 +60,7 @@ class InstructorGenerator {
             default:
                 break;
         }
-        console.log(instruction);
+        //console.log(instruction);
         return instruction;
     }
 

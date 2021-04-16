@@ -32,7 +32,7 @@ export const cpuSlice = createSlice({
                 // identifier
                 id: '2',
                 // used in order 
-                canFetch: false,
+                canFetch: true,
                 //op
                 op: 'CALC',
                 //value
@@ -56,7 +56,7 @@ export const cpuSlice = createSlice({
     },
     reducers: {
         fetch: (state, action) => {
-            console.log(action.payload);
+            //console.log(action.payload);
             const { id, op, value, address } = action.payload;
             const cpu = state.value.find((item) => {
                 return item.id === id;

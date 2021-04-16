@@ -22,7 +22,7 @@ export const App = props => {
       <Row>
         <Col md={10}><L2Cache></L2Cache> </Col>
         <Col md={6}><MainMemory></MainMemory> </Col>
-        <Col md={6}> <Dashboard></Dashboard></Col>
+        <Col md={8}> <Dashboard></Dashboard></Col>
       </Row>
 
     </Grid>

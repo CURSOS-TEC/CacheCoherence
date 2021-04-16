@@ -49,7 +49,7 @@ export const L2Cache = (props) => {
         width={750}
         data={data}
         onRowClick={data => {
-          console.log(data);
+          //console.log(data);
         }}
       >
         <Column width={70} align="center" fixed>
