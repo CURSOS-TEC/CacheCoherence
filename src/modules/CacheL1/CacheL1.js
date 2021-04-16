@@ -2,9 +2,11 @@ import React from 'react';
 import { Table, Tag } from 'rsuite';
 import { Panel } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
+import { setModalCacheL1Config } from '../CacheL1/CacheL1ModalSlice';
 const { Column, HeaderCell, Cell } = Table;
 
 export const CacheL1 = props => {
+  const dispatch = useDispatch();
   const data = useSelector(
     state => state.CachesL1.value[props.id]);
   const StateCell = ({ rowData, dataKey, ...props }) => {
@@ -18,8 +20,19 @@ export const CacheL1 = props => {
         height={135}
         width={370}
         data={data.blocks}
-        onRowClick={data => {
-          //console.log(data);
+        onRowClick={dataRow => {
+          const { address, block, data, state } = dataRow;
+          dispatch(setModalCacheL1Config(
+            {
+              id: props.id,
+              blockId:block,
+              address: address,
+              data: data,
+              state: state,
+              showModal: true,
+              backDrop: true,
+            }
+          ));
         }}
       >
         <Column width={70} align="center" fixed>
@@ -43,9 +56,9 @@ export const CacheL1 = props => {
           <Cell dataKey="data" >
 
           </Cell>
-
         </Column>
       </Table>
+
     </Panel>
   );
 }

@@ -72,7 +72,9 @@ export const CPU = (props) => {
   }
   handleInstruction(dataInstruction);
   return (
-    <Panel header="CPU" bordered>
+    <Panel bordered>
+      <p className="identifier"> CPU #{props.id}</p>
+
       <DisplayState canFetch={dataInstruction.canFetch}></DisplayState>
       <p className="operation">
         <strong>P{props.id}</strong>: <DisplayOperation instruction={dataInstruction}></DisplayOperation>

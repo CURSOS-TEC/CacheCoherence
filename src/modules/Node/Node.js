@@ -9,8 +9,7 @@ export const Node = props => {
   return (
     <Panel className="NodePanel" bordered>
       <Row>
-        <Col md={2}><p className="identifier"># {props.id}</p></Col>
-        <Col md={12}>
+        <Col md={14}>
           <CacheL1 id={props.id} />
         </Col>
         <Col md={10}>

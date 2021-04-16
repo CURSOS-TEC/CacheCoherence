@@ -7,8 +7,17 @@ import Node from './modules/Node/Node';
 
 
 import Dashboard from './modules/Dashboard/Dashboard';
-
+import CacheL1Editor from './modules/CacheL1/CacheL1Modal';
 export const App = props => {
+  const editorConfig = {
+    showModal: false,
+    backDrop: false,
+    id: null, // cacheL1 id
+    blockId: null, // the block id
+    address: null, // the address that will be stored
+    value: null, // the value to be stored 
+    state: null, // the state of the data
+  };
   return (
     <Grid fluid>
       <Row>
@@ -24,7 +33,7 @@ export const App = props => {
         <Col md={6}><MainMemory></MainMemory> </Col>
         <Col md={8}> <Dashboard></Dashboard></Col>
       </Row>
-
+      <CacheL1Editor config={editorConfig}></CacheL1Editor>
     </Grid>
   );
 }
