@@ -20,10 +20,15 @@ export const Control = props => {
   //console.log(targetInstruction);
   const handleTargetInstruction = (instruction) => {
     if (instruction.op === models.INSTRUCTION_TYPES.READ) {
-      console.log(instruction);
+      //console.log(instruction);
       const blockIndex = Number(instruction.address) % 2; // one way associative 
       const cacheLine = cacheData.blocks[blockIndex];
-      console.log(instruction.address, blockIndex, cacheLine);
+      // check if data is here and its valid
+      if (instruction.address === cacheLine.address && (cacheLine.state === models.CACHE_L1_STATES.MODIFIED || cacheLine.state === models.CACHE_L1_STATES.SHARED)) {
+        console.log('READ HIT', cacheLine);
+      } else {
+        console.log('READ MISS', cacheLine);
+      }
     } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
 
     }
