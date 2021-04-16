@@ -57,18 +57,25 @@ export const Control = props => {
       if (instruction.address === cacheLine.address && (cacheLine.state === models.CACHE_L1_STATES.MODIFIED || cacheLine.state === models.CACHE_L1_STATES.SHARED)) {
         console.log('READ HIT', cacheLine);
         message = models.COHERENCE_STATUS.READ_HIT;
+        dispatch(setFetch({ id: `${props.id}`, canFetch: true }));
+
       } else {
-        console.log('READ MISS', cacheLine);
+
+        dispatch(setFetch({ id: `${props.id}`, canFetch: false }));
+        console.log('READ MISS', cacheLine, 'setFetch to false', props.id);
         message = models.COHERENCE_STATUS.READ_MISS;
       }
     } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
       // check if data is here and its valid
       if (instruction.address === cacheLine.address && (cacheLine.state === models.CACHE_L1_STATES.MODIFIED || cacheLine.state === models.CACHE_L1_STATES.SHARED)) {
+        dispatch(setFetch({ id: `${props.id}`, canFetch: true }));
         console.log('WRITE HIT', cacheLine);
         message = models.COHERENCE_STATUS.WRITE_HIT;
+
       } else {
         console.log('WRITE MISS', cacheLine);
         message = models.COHERENCE_STATUS.WRITE_MISS;
+        dispatch(setFetch({ id: `${props.id}`, canFetch: false }));
       }
     } else {
       message = "";
