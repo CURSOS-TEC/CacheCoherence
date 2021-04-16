@@ -1,39 +1,45 @@
 import React, { useState } from 'react';
 import { Table } from 'rsuite';
 import { Panel } from 'rsuite';
+import { useSelector, useDispatch } from 'react-redux';
+
 const { Column, HeaderCell, Cell } = Table;
 
 export const L2Cache = (props) => {
-  const [ data, setData] = useState([
-    {
-      block: '0',
-      state: 'DM',
-      address: '0x1',
-      data: '0x9F',
-      list: [0, 0, 0, 0]
-    },
-    {
-      block: '1',
-      state: 'DS',
-      address: '0x23',
-      data: '0x9F',
-      list: [0, 0, 0, 0]
-    },
-    {
-      block: '2',
-      state: 'DM',
-      address: '0x1',
-      data: '0x9F',
-      list: [0, 0, 0, 0]
-    },
-    {
-      block: '3',
-      state: 'DI',
-      address: '0x23',
-      data: '0x9F',
-      list: [0, 0, 0, 0]
-    }
-  ]);
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.CacheL2.value);
+  // const [ data, setData] = useState([
+  //   {
+  //     block: '0',
+  //     state: 'DM',
+  //     address: '0x1',
+  //     data: '0x9F',
+  //     list: [0, 0, 0, 0]
+  //   },
+  //   {
+  //     block: '1',
+  //     state: 'DS',
+  //     address: '0x23',
+  //     data: '0x9F',
+  //     list: [0, 0, 0, 0]
+  //   },
+  //   {
+  //     block: '2',
+  //     state: 'DM',
+  //     address: '0x1',
+  //     data: '0x9F',
+  //     list: [0, 0, 0, 0]
+  //   },
+  //   {
+  //     block: '3',
+  //     state: 'DI',
+  //     address: '0x23',
+  //     data: '0x9F',
+  //     list: [0, 0, 0, 0]
+  //   }
+  // ]);
+
+  
   const ProcessorStatusCell = ({ rowData, dataKey, ...props }) => {
     return (
 
