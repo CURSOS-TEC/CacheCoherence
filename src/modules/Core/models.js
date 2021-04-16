@@ -14,6 +14,12 @@ const models = {
         DIRECTORY_MODIFIED: 'DM',
         DIRECTORY_SHARED: 'DS',
         DIRECTORY_INVALID: 'DI'
+    },
+    COHERENCE_STATUS: {
+        READ_HIT: 'READ_HIT',
+        READ_MISS: 'READ_MISS',
+        WRITE_HIT: 'WRITE_HIT',
+        WRITE_MISS: 'WRITE_MISS',
     }
 
 };
