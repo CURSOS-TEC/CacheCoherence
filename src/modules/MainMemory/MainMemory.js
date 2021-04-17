@@ -1,19 +1,36 @@
 import React from 'react';
 import { Table } from 'rsuite';
 import { Panel } from 'rsuite';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+import { setModalMainMemoryConfig } from '../MainMemory/MainMemoryModalSlice';
 const { Column, HeaderCell, Cell } = Table;
 
 export const MainMemory = props => {
-  const data = useSelector((state) => state.RAM.value);
+  const dispatch = useDispatch();
+  const RAMData = useSelector((state) => state.RAM.value);
   return (
     <Panel bordered header={<h3>Main Memory</h3>}>
       <Table
         height={250}
         width={370}
-        data={data}
-        onRowClick={data => {
-          //console.log(data);
+        data={RAMData}
+        onRowClick={rData => {
+          const {
+            block,
+            state,
+            address,
+            data
+          } = rData;
+          dispatch(setModalMainMemoryConfig(
+            {
+              block,
+              state,
+              address,
+              data,
+              backDrop: true,
+              showModal: true
+            }
+          ));
         }}
       >
         <Column width={70} align="center" fixed>

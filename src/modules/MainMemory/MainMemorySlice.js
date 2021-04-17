@@ -56,7 +56,7 @@ export const mainMemorySlice = createSlice({
     },
     reducers: {
         write: (state, action) => {
-            state.value.find ( item => item.address === action.payload.address).data = action.payload.value;
+            state.value.find ( item => item.address === action.payload.address).data = action.payload.data ;
             //console.log('State', state.value);
         }
     }
