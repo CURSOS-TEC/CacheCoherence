@@ -2,44 +2,14 @@ import React, { useState } from 'react';
 import { Table } from 'rsuite';
 import { Panel } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
+import { setBlock } from './CacheL2Slice';
+import { setModalCacheL2Config } from './CacheL2ModalSlice';
 
 const { Column, HeaderCell, Cell } = Table;
 
 export const L2Cache = (props) => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.CacheL2.value);
-  // const [ data, setData] = useState([
-  //   {
-  //     block: '0',
-  //     state: 'DM',
-  //     address: '0x1',
-  //     data: '0x9F',
-  //     list: [0, 0, 0, 0]
-  //   },
-  //   {
-  //     block: '1',
-  //     state: 'DS',
-  //     address: '0x23',
-  //     data: '0x9F',
-  //     list: [0, 0, 0, 0]
-  //   },
-  //   {
-  //     block: '2',
-  //     state: 'DM',
-  //     address: '0x1',
-  //     data: '0x9F',
-  //     list: [0, 0, 0, 0]
-  //   },
-  //   {
-  //     block: '3',
-  //     state: 'DI',
-  //     address: '0x23',
-  //     data: '0x9F',
-  //     list: [0, 0, 0, 0]
-  //   }
-  // ]);
-
-  
   const ProcessorStatusCell = ({ rowData, dataKey, ...props }) => {
     return (
 
@@ -54,8 +24,25 @@ export const L2Cache = (props) => {
         height={250}
         width={750}
         data={data}
-        onRowClick={data => {
-          //console.log(data);
+        onRowClick={dataRow => {
+          const {
+            block, // the block id
+            address, // the address that will be stored
+            data, // the value to be stored 
+            state, // the state of the data,
+            list
+          } = dataRow;
+          console.log(dataRow);
+          dispatch(setModalCacheL2Config({
+            showModal: true,
+            backDrop: true,
+            id: '0',
+            block, // the block id
+            address, // the address that will be stored
+            data, // the value to be stored 
+            state, // the state of the data,
+            list
+          }));
         }}
       >
         <Column width={70} align="center" fixed>
@@ -98,7 +85,7 @@ export const L2Cache = (props) => {
           <Cell dataKey="data" />
         </Column>
       </Table>
-    </Panel>
+    </Panel >
   );
 }
 

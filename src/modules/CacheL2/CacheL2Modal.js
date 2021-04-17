@@ -1,65 +1,48 @@
 'use-strict'
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, Modal, Divider, Button, Row, Col, InputGroup, SelectPicker } from 'rsuite';
+import { Input, Modal, Divider, Button, Row, Col, InputGroup, SelectPicker, Checkbox, CheckboxGroup } from 'rsuite';
 import models from '../Core/models';
-import { setModalCacheL1Config } from './CacheL1ModalSlice';
-import { setBlock } from './CacheL1Slice';
-import './CacheL1Modal.css';
-/**
- * 
- * @param {*} props {id: cache (string), id: block, state, memory_address, data}
- * @returns 
- */
-export const CacheL1Editor = (props) => {
-  const styles = {
+import './CacheL2Modal.css';
+import { setModalCacheL2Config } from './CacheL2ModalSlice';
+import { setBlock } from './CacheL2Slice';
 
-  };
-  const selectorStyles = { width: 100, };
-
+export const CacheL2Editor = (props) => {
   const dispatch = useDispatch();
 
   const {
     address,
     backDrop,
-    blockId,
+    block,
     id,
     showModal,
     state,
     data,
-  } = useSelector((state) => state.CacheL1Modal.value);
+    list
+  } = useSelector((state) => state.CacheL2Modal.value);
+
+  console.log(state, 'from data');
+  const styles = {
+    width: 120
+  };
+  const selectorStyles = { width: 170, };
 
 
-  const close = () => {
-    dispatch(setModalCacheL1Config(
-      {
-        id: null,
-        blockId: null,
-        address: null,
-        value: null,
-        state: null,
-        showModal: false,
-        backDrop: null,
-      }
-    ));
-
-  }
-
-  const coherenceStateOptions = [
+  const coherenceStateOptions2 = [
     {
-      "label": "Modified",
-      "value": models.CACHE_L1_STATES.MODIFIED,
-      "role": "cacheL1"
+      "label": "Directory Modified",
+      "value": models.CACHE_L2_STATES.DIRECTORY_MODIFIED,
+      "role": "cacheL2"
     },
     {
-      "label": "Shared",
-      "value": models.CACHE_L1_STATES.SHARED,
-      "role": "cacheL1"
+      "label": "Directory Shared",
+      "value": models.CACHE_L2_STATES.DIRECTORY_SHARED,
+      "role": "cacheL2"
     },
     {
-      "label": "Invalid",
-      "value": models.CACHE_L1_STATES.INVALID,
-      "role": "cacheL1"
+      "label": "Directory Invalid",
+      "value": models.CACHE_L2_STATES.DIRECTORY_INVALID,
+      "role": "cacheL2"
     }
   ];
   const addressOptions = [
@@ -111,39 +94,74 @@ export const CacheL1Editor = (props) => {
    * state,
    * address,
    * data
-   */
-  const newCacheLine = {
+  */
+  let newCacheLine = {
     address,
-    block: blockId,
+    block,
     id: `${id}`,
     state,
     data,
+    list
   };
-
-
-  const CL1Editor = ({ placeholder, ...props }) => (
-    <div className="inputContainerModal">
+  const close = () => {
+    dispatch(setModalCacheL2Config(
+      {
+        address,
+        backDrop: false,
+        block,
+        id,
+        showModal: false,
+        state,
+        data,
+        list
+      }
+    ));
+  }
+  const CheckedProcessor = (props) => {
+    return (
       <div>
-        # Block {blockId}
+        <p>P{props.id}</p>
+        <Checkbox
+          defaultChecked={newCacheLine.list[props.id]}
+          onChange={
+            (value, checked, event) => {
+              newCacheLine.list = newCacheLine.list.slice();
+              newCacheLine.list[props.id] = Number(checked);
+              console.log(newCacheLine);
+            }
+          }> </Checkbox>
+      </div>
+    );
+  }
+
+  const CL2Editor = ({ placeholder, ...props }) => (
+    <div className="inputContainerModal2">
+      <div>
+        # Block {block}
       </div>
       <div >
         <InputGroup {...props} inside style={styles} >
-          <InputGroup.Addon>State</InputGroup.Addon>
           <SelectPicker
             size="md"
             placeholder="State"
-            data={coherenceStateOptions}
+            data={coherenceStateOptions2}
             style={selectorStyles}
             defaultValue={newCacheLine.state}
-            onChange={(value, event) => {
+            onChange={(value) => {
               newCacheLine.state = value;
+              console.log(newCacheLine);
             }}
           />
         </InputGroup>
       </div>
+      <div className="processorsInput">
+        <CheckedProcessor id={0}></CheckedProcessor>
+        <CheckedProcessor id={1}></CheckedProcessor>
+        <CheckedProcessor id={2}></CheckedProcessor>
+        <CheckedProcessor id={3}></CheckedProcessor>
+      </div>
       <div >
         <InputGroup {...props} inside style={styles}>
-          <InputGroup.Addon>0x</InputGroup.Addon>
           <SelectPicker
             size="md"
             placeholder="Address"
@@ -158,7 +176,7 @@ export const CacheL1Editor = (props) => {
       </div>
       <div >
         <InputGroup {...props} inside style={styles}>
-          <Input placeholder={placeholder} defaultValue={newCacheLine.data} onChange={(value, event) => {
+          <Input defaultValue={newCacheLine.data} placeholder={placeholder} onChange={(value, event) => {
             newCacheLine.data = value;
           }} />
         </InputGroup>
@@ -171,27 +189,29 @@ export const CacheL1Editor = (props) => {
 
     // const { backdrop, show } = this.state;
     <div className="modal-container">
-      <Modal backdrop={backDrop} show={showModal} onHide={() => {
+      <Modal size={'md'} backdrop={backDrop} show={showModal} onHide={() => {
 
       }}>
         <Modal.Header>
-          <Modal.Title>Cache L1 Line editor for Node {id}
+          <Modal.Title>Cache L2 Line editor
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CL1Editor></CL1Editor>
+          <CL2Editor></CL2Editor>
 
 
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => {
-            //console.log(newCacheLine);
+            console.log(newCacheLine);
             dispatch(setBlock(newCacheLine));
-            close()
+            close();
           }} appearance="primary">
             Update cache line
             </Button>
-          <Button onClick={() => { close() }} appearance="subtle">
+          <Button onClick={() => {
+            close()
+          }} appearance="subtle">
             Cancel
             </Button>
         </Modal.Footer>
@@ -199,4 +219,4 @@ export const CacheL1Editor = (props) => {
     </div>
   );
 }
-export default CacheL1Editor;
+export default CacheL2Editor;

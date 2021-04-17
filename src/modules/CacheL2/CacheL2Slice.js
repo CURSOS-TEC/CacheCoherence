@@ -10,7 +10,7 @@ export const cacheL2Slice = createSlice({
                 state: 'DM',
                 address: '0x0',
                 data: '0x9F',
-                list: [0, 0, 0, 0]
+                list: [1, 0, 0, 0]
             },
             {
                 block: '1',
@@ -47,10 +47,15 @@ export const cacheL2Slice = createSlice({
             const cacheL2Line = prevState.value.find((cacheLine) => {
                 return cacheLine.block === block;
             });
-            cacheL2Line.state = state;
-            cacheL2Line.address = address;
-            cacheL2Line.data = data;
-            cacheL2Line.list = list;
+            if (cacheL2Line) {
+                cacheL2Line.state = state;
+                cacheL2Line.address = address;
+                cacheL2Line.data = data;
+                cacheL2Line.list = list;
+            } else {
+                console.log('Could not find the object', action.payload);
+
+            }
         }
     }
 

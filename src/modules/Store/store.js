@@ -6,6 +6,7 @@ import cacheL1Reducer from '../CacheL1/CacheL1Slice';
 import controlReducer  from '../Control/ControlSlice';
 import cacheL2Reducer from '../CacheL2/CacheL2Slice';
 import cacheL1ModalReducer from '../CacheL1/CacheL1ModalSlice';
+import cacheL2ModalReducer from '../CacheL2/CacheL2ModalSlice';
 
 export default configureStore({
     reducer: {
@@ -16,7 +17,7 @@ export default configureStore({
         CacheL2: cacheL2Reducer, 
         // GUI Reducers 
         CacheL1Modal:cacheL1ModalReducer,
-        CacheL2Modal: null,
+        CacheL2Modal: cacheL2ModalReducer,
         RAMModal: null
 
     },

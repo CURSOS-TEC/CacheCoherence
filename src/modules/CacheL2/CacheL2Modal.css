@@ -1,0 +1,16 @@
+.inputContainerModal2 {
+  width: 200;
+}
+.inputContainerModal2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.processorsInput{
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
