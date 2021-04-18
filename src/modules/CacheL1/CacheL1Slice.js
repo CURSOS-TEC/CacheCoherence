@@ -12,14 +12,14 @@ export const cacheL1Slice = createSlice({
           {
             block: '0',
             state: 'M',
-            address: '0x1',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           },
           {
             block: '1',
             state: 'S',
-            address: '0x23',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           }
         ]
       },
@@ -31,14 +31,14 @@ export const cacheL1Slice = createSlice({
           {
             block: '0',
             state: 'M',
-            address: '0x1',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           },
           {
             block: '1',
             state: 'S',
-            address: '0x23',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           }
         ]
       },
@@ -50,14 +50,14 @@ export const cacheL1Slice = createSlice({
           {
             block: '0',
             state: 'M',
-            address: '0x1',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           },
           {
             block: '1',
             state: 'S',
-            address: '0x23',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           }
         ]
       },
@@ -69,14 +69,14 @@ export const cacheL1Slice = createSlice({
           {
             block: '0',
             state: 'M',
-            address: '0x1',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           },
           {
             block: '1',
             state: 'S',
-            address: '0x23',
-            data: '0x9F'
+            address: '0x0',
+            data: '0x00'
           }
         ]
       }
