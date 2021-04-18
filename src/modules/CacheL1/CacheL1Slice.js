@@ -1,5 +1,6 @@
 'use-strict'
 import { createSlice } from '@reduxjs/toolkit';
+import models from '../Core/models';
 export const cacheL1Slice = createSlice({
   name: 'CachesL1',
   initialState: {
@@ -11,13 +12,13 @@ export const cacheL1Slice = createSlice({
         blocks: [
           {
             block: '0',
-            state: 'M',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           },
           {
             block: '1',
-            state: 'S',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           }
@@ -30,13 +31,13 @@ export const cacheL1Slice = createSlice({
         blocks: [
           {
             block: '0',
-            state: 'M',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           },
           {
             block: '1',
-            state: 'S',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           }
@@ -49,13 +50,13 @@ export const cacheL1Slice = createSlice({
         blocks: [
           {
             block: '0',
-            state: 'M',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           },
           {
             block: '1',
-            state: 'S',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           }
@@ -68,13 +69,13 @@ export const cacheL1Slice = createSlice({
         blocks: [
           {
             block: '0',
-            state: 'M',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           },
           {
             block: '1',
-            state: 'S',
+            state: models.CACHE_L1_STATES.INVALID,
             address: '0x0',
             data: '0x00'
           }

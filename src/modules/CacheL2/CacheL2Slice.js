@@ -1,5 +1,6 @@
 'use-strict'
 import { createSlice } from '@reduxjs/toolkit';
+import models from '../Core/models';
 import { cpuSlice } from '../CPU/CPUSlice';
 export const cacheL2Slice = createSlice({
     name: 'CacheL2',
@@ -7,30 +8,30 @@ export const cacheL2Slice = createSlice({
         value: [
             {
                 block: '0',
-                state: 'DM',
+                state: models.CACHE_L2_STATES.DIRECTORY_INVALID,
                 address: '0x0',
-                data: '0x9F',
-                list: [1, 0, 0, 0]
+                data: '0x0',
+                list: [0, 0, 0, 0]
             },
             {
                 block: '1',
-                state: 'DM',
-                address: '0x4',
-                data: '0x9F',
+                state: models.CACHE_L2_STATES.DIRECTORY_INVALID,
+                address: '0x0',
+                data: '0x0',
                 list: [0, 0, 0, 0]
             },
             {
                 block: '2',
-                state: 'DM',
-                address: '0x1',
-                data: '0x9F',
+                state: models.CACHE_L2_STATES.DIRECTORY_INVALID,
+                address: '0x0',
+                data: '0x0',
                 list: [0, 0, 0, 0]
             },
             {
                 block: '3',
-                state: 'DM',
-                address: '0x7',
-                data: '0x9F',
+                state: models.CACHE_L2_STATES.DIRECTORY_INVALID,
+                address: '0x0',
+                data: '0x0',
                 list: [0, 0, 0, 0]
             }
         ]
