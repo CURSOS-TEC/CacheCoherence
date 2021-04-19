@@ -99,10 +99,10 @@ const selectorStyles = { width: 100, };
 
 export const Dashboard = function () {
   const customInstruction = {
-    id: '',
-    op: '',
-    address: '',
-    value: '',
+    id: null,
+    op: null,
+    address: null,
+    value: null,
     canFetch: true
   };
 
@@ -111,7 +111,7 @@ export const Dashboard = function () {
 
   const generator = new InstructorGenerator();
   const fetchInstruction = (processorId) => {
-    return { id: processorId, ...generator.generateInstruction(processorId), canFetch:true };
+    return { id: processorId, ...generator.generateInstruction(processorId), canFetch: true };
   }
   const dispatch = useDispatch();
   const dispatchFetch = () => {
@@ -180,6 +180,26 @@ export const Dashboard = function () {
   const testDispatch = () => {
     //dispatch(setBlock({ id: '0', block: '1', state: 'M', address: '0x00', data: '0xFF' }));
     // CACHEL1
+    switch (customInstruction.op) {
+      case models.INSTRUCTION_TYPES.CALC:
+        if (customInstruction.id) {
+          dispatch(fetch(customInstruction));
+        }
+        break;
+      case models.INSTRUCTION_TYPES.READ:
+        if (customInstruction.id && customInstruction.address) {
+          dispatch(fetch(customInstruction));
+        }
+        break;
+      case models.INSTRUCTION_TYPES.WRITE:
+        if (customInstruction.id && customInstruction.address && customInstruction.value) {
+          dispatch(fetch(customInstruction));
+        }
+        break;
+
+      default:
+        break;
+    }
     if (customInstruction.id && customInstruction.value && customInstruction.address && customInstruction.op) {
       dispatch(fetch(customInstruction));
     }
