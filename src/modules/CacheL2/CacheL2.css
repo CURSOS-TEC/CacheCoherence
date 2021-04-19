@@ -1,0 +1,9 @@
+.CacheL2Container{
+    display: flex;
+    justify-content: center
+}
+.Queue{
+    max-height: 250px;
+    overflow-y: scroll;
+    margin-left: 5px;
+}

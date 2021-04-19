@@ -8,6 +8,7 @@ import cacheL2Reducer from '../CacheL2/CacheL2Slice';
 import cacheL1ModalReducer from '../CacheL1/CacheL1ModalSlice';
 import cacheL2ModalReducer from '../CacheL2/CacheL2ModalSlice';
 import mainMemoryModalReducer from '../MainMemory/MainMemoryModalSlice';
+import queueTaskReducer from '../CacheL2/QueueTaskSlice';
 export default configureStore({
     reducer: {
         RAM: mainMemoryReducer,
@@ -18,7 +19,9 @@ export default configureStore({
         // GUI Reducers 
         CacheL1Modal:cacheL1ModalReducer,
         CacheL2Modal: cacheL2ModalReducer,
-        RAMModal: mainMemoryModalReducer
+        RAMModal: mainMemoryModalReducer,
+        //Estado que almacena el espacio
+        QueueTask: queueTaskReducer
 
     },
 });
