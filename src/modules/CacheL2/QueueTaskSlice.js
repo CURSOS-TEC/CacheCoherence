@@ -26,10 +26,12 @@ export const queueTaskSlice = createSlice({
          * identifier: Date.now
          */
         enQueue: (rState, action) => {
-          rState.value.push(action.payload);
+            rState.value.push(action.payload);
+            localStorage.setItem('QueueTask', JSON.stringify(rState.value));
         },
-        deQueue: (rState,action) => {
+        deQueue: (rState, action) => {
             rState.value.shift();
+            localStorage.setItem('QueueTask', JSON.stringify(rState.value));
         }
     }
 

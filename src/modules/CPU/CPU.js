@@ -1,50 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Panel, Tag } from 'rsuite';
 import models from '../Core/models';
-import { setInstructionTarget } from '../Control/ControlSlice';
 import './CPU.css';
 /**
  * Esta clase abstrae la simulación de 
  */
 export const CPU = (props) => {
-  const dispatch = useDispatch();
   const dataInstruction = useSelector(state => state.CPUs.value[props.id]);
-  //console.log(dataInstruction);
-
-  const handleInstruction = (instruction) => {
-    console.log('handleInstruction ');
-    if (dataInstruction.canFetch) {
-      if (instruction.op === models.INSTRUCTION_TYPES.READ) {
-        // read the value from Cache
-        console.log('handleInstruction dispatch(setInstructionTarget read');
-        dispatch(setInstructionTarget({
-          id: props.id,
-          instruction: {
-            op: models.INSTRUCTION_TYPES.READ,
-            address: dataInstruction.address,
-            value: null
-          },
-          completed: false
-        }))
-
-      } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
-
-        console.log('handleInstruction dispatch(setInstructionTarget write');
-
-        dispatch(setInstructionTarget({
-          id: props.id,
-          instruction: {
-            op: models.INSTRUCTION_TYPES.WRITE,
-            address: dataInstruction.address,
-            value: dataInstruction.value
-          },
-          completed: false
-        }))
-      }
-    }
-  }
-
   const DisplayOperation = (dProps) => {
     const data = dProps.instruction;
     if (data) {
@@ -76,7 +39,6 @@ export const CPU = (props) => {
       return (<Tag color="red">IDLE</Tag>);
     }
   }
-  handleInstruction(dataInstruction);
   return (
     <Panel bordered>
       <p className="identifier"> CPU #{props.id}</p>

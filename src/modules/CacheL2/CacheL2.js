@@ -1,8 +1,9 @@
 import React from 'react';
-import {  Table, Timeline } from 'rsuite';
+import { Table, Timeline } from 'rsuite';
 import { Panel } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
 import { setModalCacheL2Config } from './CacheL2ModalSlice';
+import models from '../Core/models';
 import './CacheL2.css';
 const { Column, HeaderCell, Cell } = Table;
 
@@ -32,17 +33,14 @@ export const L2Cache = (props) => {
     return (
       <Timeline >
         {queue.map(task => {
-          const { op, address, value, condition, identifier,processorId } = task;
+          const { op, address, value, condition, identifier, processorId } = task;
           return (<Task processorId={processorId} key={identifier} op={op} address={address} value={value} condition={condition} />);
         })}
       </Timeline>);
   }
-
   return (
     <Panel bordered header={<h3>Cache L2: two-way-associative</h3>}>
       <div className='CacheL2Container'>
-
-
         <div>
           <Table
             height={250}
@@ -109,9 +107,6 @@ export const L2Cache = (props) => {
               <Cell dataKey="data" />
             </Column>
           </Table>
-        </div>
-        <div className='Queue'>
-          <GenerateTasks queue={queue} />
         </div>
       </div>
     </Panel >

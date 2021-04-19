@@ -10,6 +10,7 @@ import Dashboard from './modules/Dashboard/Dashboard';
 import CacheL1Editor from './modules/CacheL1/CacheL1Modal';
 import CacheL2Editor from './modules/CacheL2/CacheL2Modal';
 import RAMEditor from './modules/MainMemory/MainMemoryModal';
+import { MainController } from './modules/MainControl/MainControl';
 export const App = props => {
   return (
     <Grid fluid>
@@ -25,6 +26,9 @@ export const App = props => {
         <Col md={10}><L2Cache></L2Cache> </Col>
         <Col md={6}><MainMemory></MainMemory> </Col>
         <Col md={8}> <Dashboard></Dashboard></Col>
+      </Row>
+      <Row>
+        <Col md={4}> <MainController></MainController></Col>
       </Row>
       <CacheL1Editor ></CacheL1Editor>
       <CacheL2Editor ></CacheL2Editor>

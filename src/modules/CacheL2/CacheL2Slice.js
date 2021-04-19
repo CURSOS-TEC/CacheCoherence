@@ -56,6 +56,8 @@ export const cacheL2Slice = createSlice({
                 console.log('Could not find the object', action.payload);
 
             }
+            localStorage.setItem('CacheL2', JSON.stringify(prevState.value));
+
         }
     }
 

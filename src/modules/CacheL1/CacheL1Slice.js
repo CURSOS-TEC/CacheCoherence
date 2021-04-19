@@ -85,24 +85,25 @@ export const cacheL1Slice = createSlice({
   },
   reducers: {
     setBlock: (rState, action) => {
-      const {id, block, state,address,data } = action.payload;
-      const cacheL1 = rState.value.find( cache => {
+      const { id, block, state, address, data } = action.payload;
+      const cacheL1 = rState.value.find(cache => {
         return cache.id === id;
       });
-      if(cacheL1){
+      if (cacheL1) {
 
-        const blockToEdit = cacheL1.blocks.find ( blockItem => {
+        const blockToEdit = cacheL1.blocks.find(blockItem => {
           return blockItem.block === block;
         });
         blockToEdit.state = state;
         blockToEdit.address = address;
         blockToEdit.data = data;
-      }else {
-        console.log('Could not find the object',action.payload);
+      } else {
+        console.log('Could not find the object', action.payload);
       }
+      localStorage.setItem('CachesL1', JSON.stringify(rState.value));
     }
   }
 });
 
-export const { setBlock} = cacheL1Slice.actions;
+export const { setBlock } = cacheL1Slice.actions;
 export default cacheL1Slice.reducer;

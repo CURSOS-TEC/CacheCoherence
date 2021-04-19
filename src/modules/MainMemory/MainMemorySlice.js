@@ -58,6 +58,7 @@ export const mainMemorySlice = createSlice({
         write: (state, action) => {
             state.value.find ( item => item.address === action.payload.address).data = action.payload.data ;
             //console.log('State', state.value);
+            localStorage.setItem('RAM',state.value);
         }
     }
 })

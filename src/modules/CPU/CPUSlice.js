@@ -57,7 +57,7 @@ export const cpuSlice = createSlice({
     reducers: {
         fetch: (state, action) => {
             //console.log(action.payload);
-            const { id, op, value, address,canFetch } = action.payload;
+            const { id, op, value, address, canFetch } = action.payload;
             const cpu = state.value.find((item) => {
                 return item.id === id;
             });
@@ -65,6 +65,9 @@ export const cpuSlice = createSlice({
             cpu.address = address;
             cpu.value = value;
             cpu.canFetch = canFetch;
+            localStorage.setItem('CPUs', JSON.stringify(state.value));
+            localStorage.setItem('currentCPU', JSON.stringify(id));
+            
         },
         setFetch: (state, action) => {
             const { id, canFetch } = action.payload;
@@ -73,10 +76,11 @@ export const cpuSlice = createSlice({
             });
             if (cpu) {
                 cpu.canFetch = canFetch;
-            }else {
+            } else {
                 console.log(`Can't make the fetch`, id, canFetch);
             }
-
+            localStorage.setItem('CPUs', JSON.stringify(state.value));
+            localStorage.setItem('currentCPU','');
         }
 
     }
