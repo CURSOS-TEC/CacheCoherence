@@ -104,7 +104,8 @@ export const Dashboard = function () {
     id: '',
     op: '',
     address: '',
-    value: ''
+    value: '',
+    canFetch: true
   };
 
 
@@ -112,7 +113,7 @@ export const Dashboard = function () {
 
   const generator = new InstructorGenerator();
   const fetchInstruction = (processorId) => {
-    return { id: processorId, ...generator.generateInstruction(processorId) };
+    return { id: processorId, ...generator.generateInstruction(processorId), canFetch:true };
   }
   const dispatch = useDispatch();
   const dispatchFetch = () => {
@@ -168,7 +169,6 @@ export const Dashboard = function () {
       </Col>
       <Col md={12}>
         <InputGroup {...props} inside style={styles}>
-          <InputGroup.Addon>Val</InputGroup.Addon>
           <Input placeholder={placeholder} onChange={(value, event) => {
             customInstruction.value = value;
           }} />
@@ -201,13 +201,13 @@ export const Dashboard = function () {
         <Row>
           <Col className="cpuSwitch" md={12}>
             <Tag>P0</Tag>
-            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+            <Toggle defaultChecked={allCPUS[0].canFetch} size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
               dispatch(setFetch({ id: '0', canFetch: checked }));
             }} />
           </Col>
           <Col className="cpuSwitch" md={12}>
             <Tag>P1</Tag>
-            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+            <Toggle defaultChecked={allCPUS[1].canFetch} size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
               dispatch(setFetch({ id: '1', canFetch: checked }));
             }} />
           </Col>
@@ -215,13 +215,13 @@ export const Dashboard = function () {
         <Row>
           <Col className="cpuSwitch" md={12}>
             <Tag>P2</Tag>
-            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+            <Toggle defaultChecked={allCPUS[2].canFetch} size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
               dispatch(setFetch({ id: '2', canFetch: checked }));
             }} />
           </Col>
           <Col className="cpuSwitch" md={12}>
             <Tag>P3</Tag>
-            <Toggle defaultChecked size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
+            <Toggle defaultChecked={allCPUS[3].canFetch} size="md" checkedChildren="READY" unCheckedChildren="IDLE" onChange={(checked, event) => {
               dispatch(setFetch({ id: '3', canFetch: checked }));
             }} />
           </Col>

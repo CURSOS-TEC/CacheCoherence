@@ -57,13 +57,14 @@ export const cpuSlice = createSlice({
     reducers: {
         fetch: (state, action) => {
             //console.log(action.payload);
-            const { id, op, value, address } = action.payload;
+            const { id, op, value, address,canFetch } = action.payload;
             const cpu = state.value.find((item) => {
                 return item.id === id;
             });
             cpu.op = op;
             cpu.address = address;
             cpu.value = value;
+            cpu.canFetch = canFetch;
         },
         setFetch: (state, action) => {
             const { id, canFetch } = action.payload;

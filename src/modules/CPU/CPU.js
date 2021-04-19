@@ -14,28 +14,33 @@ export const CPU = (props) => {
   //console.log(dataInstruction);
 
   const handleInstruction = (instruction) => {
+    console.log('handleInstruction');
     if (instruction.op === models.INSTRUCTION_TYPES.READ) {
       // read the value from Cache
-      dispatch(setInstructionTarget({
-        id: props.id,
-        instruction: {
-          op: models.INSTRUCTION_TYPES.READ,
-          address: dataInstruction.address,
-          value: null
-        },
-        completed: false
-      }))
+      if (dataInstruction.canFetch) {
+        dispatch(setInstructionTarget({
+          id: props.id,
+          instruction: {
+            op: models.INSTRUCTION_TYPES.READ,
+            address: dataInstruction.address,
+            value: null
+          },
+          completed: false
+        }))
+      }
     } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
       // write the value to cache
-      dispatch(setInstructionTarget({
-        id: props.id,
-        instruction: {
-          op: models.INSTRUCTION_TYPES.WRITE,
-          address: dataInstruction.address,
-          value: dataInstruction.value
-        },
-        completed: false
-      }))
+      if (dataInstruction.canFetch) {
+        dispatch(setInstructionTarget({
+          id: props.id,
+          instruction: {
+            op: models.INSTRUCTION_TYPES.WRITE,
+            address: dataInstruction.address,
+            value: dataInstruction.value
+          },
+          completed: false
+        }))
+      }
     }
   }
 

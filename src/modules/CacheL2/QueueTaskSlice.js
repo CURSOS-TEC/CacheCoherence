@@ -5,6 +5,7 @@ export const queueTaskSlice = createSlice({
     name: 'QueueTask',
     /**
      * {
+            processorId: 0,
             op: models.INSTRUCTION_TYPES.CALC,
             address: '0x1',
             value: '0x33',
@@ -18,6 +19,7 @@ export const queueTaskSlice = createSlice({
     },
     reducers: {
         /**
+         * processorId: 0,
          * op: CALC, READ, WRITE
          * address: 0x7
          * value: 0xFF

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setFetch } from './../CPU/CPUSlice';
 import models from '../Core/models';
 import './Control.css';
+import { enQueue } from '../CacheL2/QueueTaskSlice';
 /**
  * this function handles when the CPU is requesting  for READ and Write OPS
  * @param {*} props 
@@ -60,14 +61,24 @@ export const Control = props => {
         dispatch(setFetch({ id: `${props.id}`, canFetch: true }));
 
       } else {
-
+        // Stops processor
         dispatch(setFetch({ id: `${props.id}`, canFetch: false }));
+        //enQueue task manager
+        dispatch(enQueue({
+          processorId: props.id,
+          op: models.INSTRUCTION_TYPES.READ,
+          address:  instruction.address,
+          value: instruction.value,
+          condition: models.COHERENCE_STATUS.READ_MISS,
+          identifier: Date.now()
+        }))
         console.log('READ MISS', cacheLine, 'setFetch to false', props.id);
         message = models.COHERENCE_STATUS.READ_MISS;
       }
     } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
       // check if data is here and its valid
       if (instruction.address === cacheLine.address && (cacheLine.state === models.CACHE_L1_STATES.MODIFIED || cacheLine.state === models.CACHE_L1_STATES.SHARED)) {
+        dispatch(setFetch)
         dispatch(setFetch({ id: `${props.id}`, canFetch: true }));
         console.log('WRITE HIT', cacheLine);
         message = models.COHERENCE_STATUS.WRITE_HIT;

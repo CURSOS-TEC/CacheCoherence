@@ -21,9 +21,9 @@ export const L2Cache = (props) => {
   }
 
   const Task = (props) => {
-    const { op, address, value, condition } = props;
+    const { op, address, value, condition, processorId } = props;
     return (
-      <Timeline.Item>{op} {condition} {address} {value}</Timeline.Item>
+      <Timeline.Item> Processor:{processorId} {op} {condition} {address} {value}</Timeline.Item>
     )
   }
 
@@ -33,8 +33,8 @@ export const L2Cache = (props) => {
     return (
       <Timeline >
         {queue.map(task => {
-          const { op, address, value, condition, identifier } = task;
-          return (<Task key={identifier} op={op} address={address} value={value} condition={condition} />);
+          const { op, address, value, condition, identifier,processorId } = task;
+          return (<Task processorId={processorId} key={identifier} op={op} address={address} value={value} condition={condition} />);
         })}
       </Timeline>);
   }
