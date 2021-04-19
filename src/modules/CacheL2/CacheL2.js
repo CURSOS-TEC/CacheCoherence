@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Divider, Table, Timeline } from 'rsuite';
+import React from 'react';
+import {  Table, Timeline } from 'rsuite';
 import { Panel } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBlock } from './CacheL2Slice';
 import { setModalCacheL2Config } from './CacheL2ModalSlice';
 import './CacheL2.css';
 const { Column, HeaderCell, Cell } = Table;

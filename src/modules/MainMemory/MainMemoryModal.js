@@ -1,7 +1,7 @@
 'use-strict'
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, Modal, Divider, Button, Row, Col, InputGroup, SelectPicker } from 'rsuite';
+import { Input, Modal, Divider, Button, InputGroup, SelectPicker } from 'rsuite';
 import { setModalMainMemoryConfig } from './MainMemoryModalSlice';
 import { write } from './MainMemorySlice';
 

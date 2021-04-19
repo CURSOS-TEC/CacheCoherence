@@ -1,7 +1,6 @@
 'use-strict'
 import { createSlice } from '@reduxjs/toolkit';
 import models from '../Core/models';
-import { cpuSlice } from '../CPU/CPUSlice';
 export const cacheL2Slice = createSlice({
     name: 'CacheL2',
     initialState: {

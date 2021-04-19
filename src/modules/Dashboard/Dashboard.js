@@ -6,11 +6,9 @@ import InstructorGenerator from '../Core/InstructionGenerator';
 import { useSelector } from 'react-redux';
 import './Dashboard.css';
 // RAM Write ops
-import { write } from '../MainMemory/MainMemorySlice';
 // CPU 
 import { fetch, setFetch } from '../CPU/CPUSlice';
 //CacheL1
-import { setBlock } from './../CacheL1/CacheL1Slice';
 import models from '../Core/models';
 const styles = {
   marginBottom: 10

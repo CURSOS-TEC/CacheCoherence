@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Button } from 'rsuite';
+import { Grid, Row, Col } from 'rsuite';
 import 'rsuite/lib/styles/index.less'; // or 'rsuite/dist/styles/rsuite-default.css'
 import L2Cache from './modules/CacheL2/CacheL2';
 import MainMemory from './modules/MainMemory/MainMemory';
@@ -28,7 +28,7 @@ export const App = props => {
       </Row>
       <CacheL1Editor ></CacheL1Editor>
       <CacheL2Editor ></CacheL2Editor>
-      <RAMEditor/>
+      <RAMEditor />
     </Grid>
   );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Panel, Tag } from 'rsuite';
 import models from '../Core/models';
-import { setFetch } from '../CPU/CPUSlice';
 import { setInstructionTarget } from '../Control/ControlSlice';
 import './CPU.css';
 /**

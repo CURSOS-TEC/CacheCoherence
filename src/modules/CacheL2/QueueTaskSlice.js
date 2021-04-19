@@ -1,6 +1,5 @@
 'use-strict'
 import { createSlice } from '@reduxjs/toolkit'
-import models from '../Core/models';
 export const queueTaskSlice = createSlice({
     name: 'QueueTask',
     /**
@@ -14,7 +13,7 @@ export const queueTaskSlice = createSlice({
         }
      */
     initialState: {
-        value: [,
+        value: [
         ]
     },
     reducers: {
