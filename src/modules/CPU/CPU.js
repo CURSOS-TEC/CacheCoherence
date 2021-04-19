@@ -13,10 +13,11 @@ export const CPU = (props) => {
   //console.log(dataInstruction);
 
   const handleInstruction = (instruction) => {
-    console.log('handleInstruction');
-    if (instruction.op === models.INSTRUCTION_TYPES.READ) {
-      // read the value from Cache
-      if (dataInstruction.canFetch) {
+    console.log('handleInstruction ');
+    if (dataInstruction.canFetch) {
+      if (instruction.op === models.INSTRUCTION_TYPES.READ) {
+        // read the value from Cache
+        console.log('handleInstruction dispatch(setInstructionTarget read');
         dispatch(setInstructionTarget({
           id: props.id,
           instruction: {
@@ -26,10 +27,11 @@ export const CPU = (props) => {
           },
           completed: false
         }))
-      }
-    } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
-      // write the value to cache
-      if (dataInstruction.canFetch) {
+
+      } else if (instruction.op === models.INSTRUCTION_TYPES.WRITE) {
+
+        console.log('handleInstruction dispatch(setInstructionTarget write');
+
         dispatch(setInstructionTarget({
           id: props.id,
           instruction: {

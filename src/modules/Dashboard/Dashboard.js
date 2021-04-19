@@ -200,9 +200,6 @@ export const Dashboard = function () {
       default:
         break;
     }
-    if (customInstruction.id && customInstruction.value && customInstruction.address && customInstruction.op) {
-      dispatch(fetch(customInstruction));
-    }
   }
   return (
     <Panel header="Control Dashboard" bordered >

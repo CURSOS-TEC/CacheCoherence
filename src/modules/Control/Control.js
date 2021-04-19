@@ -49,7 +49,7 @@ export const Control = props => {
 
 
   //console.log(targetInstruction);
-  const handleTargetInstruction = (instruction) => {
+  const handleTargetInstruction = async (instruction) => {
     //console.log(instruction);
     const blockIndex = Number(instruction.address) % 2; // one way associative 
     const cacheLine = cacheData.blocks[blockIndex];
@@ -61,17 +61,20 @@ export const Control = props => {
         dispatch(setFetch({ id: `${props.id}`, canFetch: true }));
 
       } else {
-        // Stops processor
-        dispatch(setFetch({ id: `${props.id}`, canFetch: false }));
         //enQueue task manager
-        dispatch(enQueue({
-          processorId: props.id,
-          op: models.INSTRUCTION_TYPES.READ,
-          address:  instruction.address,
-          value: instruction.value,
-          condition: models.COHERENCE_STATUS.READ_MISS,
-          identifier: Date.now()
-        }))
+        await Promise.all([
+
+          dispatch(enQueue({
+            processorId: props.id,
+            op: models.INSTRUCTION_TYPES.READ,
+            address: instruction.address,
+            value: instruction.value,
+            condition: models.COHERENCE_STATUS.READ_MISS,
+            identifier: Date.now()
+          })),
+          dispatch(setFetch({ id: `${props.id}`, canFetch: false }))
+        ])
+        // Stops processor
         console.log('READ MISS', cacheLine, 'setFetch to false', props.id);
         message = models.COHERENCE_STATUS.READ_MISS;
       }
